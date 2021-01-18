@@ -5,3 +5,16 @@ body {
 h1 {
     color: white;
 }
+
+#game {
+    height: 620px;
+    border: 1px solid white;
+}
+
+.mb {
+    margin-bottom: 0 !important;
+}
+
+#user {
+    position: relative;
+}
