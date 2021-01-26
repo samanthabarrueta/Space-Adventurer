@@ -2,6 +2,12 @@ body {
     background-color: #262038;
 }
 
+canvas {
+    background-color: #262038;
+    width: 100%;
+    height: auto;
+}
+
 h1 {
     color: white;
 }
