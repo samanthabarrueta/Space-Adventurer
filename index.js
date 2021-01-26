@@ -4,15 +4,16 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 class Villain {
-    constructor(x, y) {
+    constructor(x) {
         this.x = x;
-        this.y = y;
+        this.y = 0;
         this.size = 15;
         this.weight = 2;
         this.direction = 1;
-    };
-    update() {
-        this.y += this.weight;
+        this.velocity = {
+            x: 1,
+            y: 1
+        };
     };
     draw() {
         ctx.fillStyle = 'red';
@@ -21,13 +22,18 @@ class Villain {
         ctx.closePath();
         ctx.fill();
     };
+    update() {
+        this.draw()
+        this.y = this.y + this.velocity.y;
+    };
 };
-const villain1 = new Villain(50, 50);
+const villains = new Villain(50, 50);
+
+
 
 const animate = () => {
-    villain1.update();
-    villain1.draw();
+    requestAnimationFrame(animate);
+    villains.update();
 };
 
 animate();
-
