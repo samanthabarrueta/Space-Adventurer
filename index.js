@@ -8,8 +8,8 @@ let villainsArray = [];
 class Player {
     constructor(x) {
         this.x = canvas.width/2;
-        this.y = 90;
-        this.size = 15;
+        this.y = canvas.height;
+        this.size = 25;
     };
     draw() {
         ctx.fillStyle = 'blue';
