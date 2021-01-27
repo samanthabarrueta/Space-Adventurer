@@ -5,6 +5,25 @@ canvas.height = window.innerHeight;
 
 let villainsArray = [];
 
+class Player {
+    constructor(x) {
+        this.x = canvas.width/2;
+        this.y = 90;
+        this.size = 15;
+    };
+    draw() {
+        ctx.fillStyle = 'blue';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+    };
+    update() {
+        this.draw()
+        this.y = this.y + this.velocity.y;
+    };
+};
+
 class Villain {
     constructor(x) {
         this.x = Math.random() * canvas.width;
@@ -41,6 +60,8 @@ const animate = () => {
     villainsArray.forEach((villain) => {
         villain.update()
     });
+    const player1 = new Player();
+    player1.draw();
 };
 
 animate();
