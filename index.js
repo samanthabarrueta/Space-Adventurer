@@ -1,8 +1,8 @@
-const canvas = document.getElementById('canvas');
+canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
+       
 let villainsArray = [];
 
 class Player {
@@ -10,6 +10,9 @@ class Player {
         this.x = canvas.width/2;
         this.y = canvas.height;
         this.size = 25;
+        this.weight = 2;
+        this.direction = 1;
+        this.speed = 20;
     };
     draw() {
         ctx.fillStyle = 'blue';
@@ -19,8 +22,20 @@ class Player {
         ctx.fill();
     };
     update() {
-        this.draw()
-        this.y = this.y + this.velocity.y;
+        this.draw();
+        this.move(); 
+    };
+    move() {
+        document.addEventListener('keydown', doKeyDown, true);
+    };
+};
+
+const doKeyDown = (key) => {
+    if(key.keyCode == 37) { 
+        console.log('left')
+    };
+    if(key.keyCode == 39) {
+        console.log('right')
     };
 };
 
@@ -44,7 +59,7 @@ class Villain {
         ctx.fill();
     };
     update() {
-        this.draw()
+        this.draw();
         this.y = this.y + this.velocity.y;
     };
 };
@@ -61,7 +76,7 @@ const animate = () => {
         villain.update()
     });
     const player1 = new Player();
-    player1.draw();
+    player1.update();
 };
 
 animate();
