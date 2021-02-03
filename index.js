@@ -23,8 +23,8 @@ class Player {
         ctx.fill();
     }; 
     update() {
+        this.x += this.dx;
         this.draw();
-        this.x = this.x + this.dx;
         console.log(this.x)
     };
 };
@@ -56,8 +56,8 @@ class Villain {
         ctx.fill();
     };
     update() {
+        this.y += this.dy;
         this.draw();
-        this.y = this.y + this.velocity.y;
     };
 };
 
