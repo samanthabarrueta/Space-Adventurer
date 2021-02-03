@@ -10,13 +10,9 @@ class Player {
     constructor(x) {
         this.x = canvas.width/2;
         this.y = canvas.height;
-        this.dx = 5;
+        this.dx = 1;
         this.size = 25;
         this.weight = 2;
-        this.velocity = {
-            x: 1,
-            y: 1
-        };
     };
     draw() {
         // document.addEventListener('keydown', doKeyDown, true);
@@ -28,7 +24,7 @@ class Player {
     }; 
     update() {
         this.draw();
-        this.x = this.x + this.velocity.x;
+        this.x = this.x + this.dx;
         console.log(this.x)
     };
 };
@@ -48,13 +44,9 @@ class Villain {
     constructor(x) {
         this.x = Math.random() * canvas.width;
         this.y = 0;
+        this.dy = 1;
         this.size = 15;
         this.weight = 2;
-        this.direction = 1;
-        this.velocity = {
-            x: 1,
-            y: 1
-        };
     };
     draw() {
         ctx.fillStyle = 'red';
