@@ -7,41 +7,56 @@ let villainsArray = [];
 let playerArray = [];
 
 class Player {
-    constructor(x) {
+    constructor(x, y) {
         this.x = canvas.width/2;
-        this.y = canvas.height;
+        this.y = y;
         this.dx = 1;
         this.size = 25;
         this.weight = 2;
     };
     draw() {
-        // document.addEventListener('keydown', doKeyDown, true);
         ctx.fillStyle = 'blue';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fill();
     }; 
-    update() {
+    moveRight() {
         this.x += this.dx;
         this.draw();
-        console.log(this.x)
+        console.log('moveRight' + this.x);
+        playerArray.push(new Player(this.x, canvas.height));
+    };
+    moveLeft() {
+        this.x -= this.dx;
+        this.draw();
+        console.log('moveLeft' + this.x);
+        playerArray.push(new Player(this.x, canvas.height));
     };
 };
 
-// const doKeyDown = (key) => {
-//     if(key.keyCode == 37) { 
-//         this.x -= this.dx;
-//         console.log(this.x)
-//     };
-//     if(key.keyCode == 39) {
-//         this.x += this.dx;
-//         console.log(this.x)
-//     };
+// const spawnPlayers = () => {
+//     setInterval(() => {
+//         playerArray.push(new Player())// push onclick
+//     }, 1500);
 // };
 
+const doKeyDown = (key) => {
+    if(key.keyCode == 37) { 
+        alert(key.keyCode);
+        player.moveLeft();
+    };
+    if(key.keyCode == 39) {
+        alert(key.keyCode);
+        player.moveRight();
+    };
+};
+
+let player = (new Player(canvas.width/2, canvas.height));
+addEventListener('keydown', doKeyDown, true);
+
 class Villain {
-    constructor(x) {
+    constructor() {
         this.x = Math.random() * canvas.width;
         this.y = 0;
         this.dy = 1;
@@ -67,32 +82,16 @@ const spawnVillains = () => {
     }, 1500);
 };
 
-const spawnPlayers = () => {
-    setInterval(() => {
-        playerArray.push(new Player())
-    }, 1500);
-};
-
 const animate = () => {
     requestAnimationFrame(animate);
     villainsArray.forEach((villain) => {
         villain.update()
     });
-    playerArray.forEach((player) => {
-        player.update()
-    });
+    // playerArray.forEach((player) => {
+    //     player.update()
+    // });
 };
 
 animate();
 spawnVillains();
-spawnPlayers();
-
-// var lastDownTarget, canvas; 
-// window.onload = function() { 
-// canvas = document.getElementById('canvas'); 
-
-// /* For mouse event */ 
-// document.addEventListener('mousedown', function(event) { 
-// lastDownTarget = event.target; 
-// console.log('Mousedown Event'); 
-// }, false); 
+//spawnPlayers();
