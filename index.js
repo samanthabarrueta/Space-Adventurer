@@ -4,7 +4,6 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
        
 let villainsArray = [];
-let playerArray = [];
 
 class Player {
     constructor(x, y) {
@@ -24,16 +23,14 @@ class Player {
     moveRight() {
         this.x += this.dx;
         console.log('moveRight' + this.x);
-        playerArray.push(new Player(this.x, canvas.height));
     };
     moveLeft() {
         this.x -= this.dx;
         console.log('moveLeft' + this.x);
-        playerArray.push(new Player(this.x, canvas.height));
     };
     update() {
         this.draw();
-    }
+    };
 };
 
 const doKeyDown = (key) => {
