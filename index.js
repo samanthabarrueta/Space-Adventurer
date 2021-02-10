@@ -47,6 +47,7 @@ const doKeyDown = (key) => {
 };
 
 let player = (new Player(canvas.width/2, canvas.height));
+player.update();
 addEventListener('keydown', doKeyDown, true);
 
 class Villain {
