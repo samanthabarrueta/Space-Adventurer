@@ -10,7 +10,7 @@ class Player {
     constructor(x, y) {
         this.x = canvas.width/2;
         this.y = y;
-        this.dx = 1;
+        this.dx = 10;
         this.size = 25;
         this.weight = 2;
     };
@@ -23,32 +23,29 @@ class Player {
     }; 
     moveRight() {
         this.x += this.dx;
-        this.draw();
         console.log('moveRight' + this.x);
         playerArray.push(new Player(this.x, canvas.height));
     };
     moveLeft() {
         this.x -= this.dx;
-        this.draw();
         console.log('moveLeft' + this.x);
         playerArray.push(new Player(this.x, canvas.height));
     };
+    update() {
+        this.draw();
+    }
 };
-
-// const spawnPlayers = () => {
-//     setInterval(() => {
-//         playerArray.push(new Player())// push onclick
-//     }, 1500);
-// };
 
 const doKeyDown = (key) => {
     if(key.keyCode == 37) { 
         alert(key.keyCode);
         player.moveLeft();
+        player.update();
     };
     if(key.keyCode == 39) {
         alert(key.keyCode);
         player.moveRight();
+        player.update();
     };
 };
 
@@ -87,11 +84,7 @@ const animate = () => {
     villainsArray.forEach((villain) => {
         villain.update()
     });
-    // playerArray.forEach((player) => {
-    //     player.update()
-    // });
 };
 
 animate();
 spawnVillains();
-//spawnPlayers();
