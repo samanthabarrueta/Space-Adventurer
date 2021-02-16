@@ -1,24 +1,20 @@
-canvas = document.getElementById('canvas');
+const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-       
+
 let villainsArray = [];
 
 class Player {
-    constructor() {
-        this.x = canvas.width/2;
-        this.y = canvas.height;
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
         this.dx = 10;
         this.radius = 25;
-        this.weight = 2;
+        this.icon = document.getElementById('user');
     };
     draw() {
-        ctx.fillStyle = 'blue';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
+        ctx.drawImage(this.icon, this.x, this.y, 50, 50);
     }; 
     moveRight() {
         this.x += this.dx;
@@ -42,7 +38,7 @@ const doKeyDown = (key) => {
     };
 };
 
-let player = (new Player());
+let player = new Player(canvas.width/2, canvas.height-50);
 player.update();
 addEventListener('keydown', doKeyDown, true);
 
@@ -51,15 +47,11 @@ class Villain {
         this.x = Math.random() * canvas.width;
         this.y = 0;
         this.dy = 1;
-        this.size = 15;
-        this.weight = 2;
+        this.radius = 15;
+        this.icon = document.getElementById('enemy');
     };
     draw() {
-        ctx.fillStyle = 'red';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
+        ctx.drawImage(this.icon, this.x, this.y, 50, 50);
     };
     update() {
         this.y += this.dy;
@@ -76,7 +68,7 @@ const spawnVillains = () => {
 const animate = () => {
     requestAnimationFrame(animate);
     villainsArray.forEach((villain) => {
-        villain.update()
+        villain.update();
     });
 };
 
