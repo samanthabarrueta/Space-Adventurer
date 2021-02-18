@@ -27,6 +27,31 @@ class Player {
     };
 };
 
+class Projectile {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.dx = 10;
+        this.radius = 25;
+        this.icon = document.getElementById('missile');
+    };
+    draw() {
+        ctx.drawImage(this.icon, this.x, this.y, 25, 25);
+    };
+    moveRight() {
+        this.x += this.dx;
+    };
+    moveLeft() {
+        this.x -= this.dx;
+    };
+    shoot() {
+        this.y -= this.dy;
+    }
+    update() {
+        this.draw();
+    };
+};
+
 const doKeyDown = (key) => {
     if(key.keyCode == 37) { 
         player.moveLeft();
@@ -38,8 +63,12 @@ const doKeyDown = (key) => {
     };
 };
 
+//return projectile to user after firing 
+
 let player = new Player(canvas.width/2, canvas.height-50);
 player.update();
+let projectile = new Projectile(canvas.width/2, canvas.height-150);
+projectile.update();
 addEventListener('keydown', doKeyDown, true);
 
 class Villain {
