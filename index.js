@@ -4,6 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let villainsArray = [];
+let projectileArray = [];
 
 class Player {
     constructor(x, y) {
@@ -31,23 +32,16 @@ class Projectile {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.dx = 10;
-        this.radius = 25;
+        //this.dx = 10;
+        this.dy = 5;
+        this.radius = 50;
         this.icon = document.getElementById('missile');
     };
     draw() {
-        ctx.drawImage(this.icon, this.x, this.y, 25, 25);
-    };
-    moveRight() {
-        this.x += this.dx;
-    };
-    moveLeft() {
-        this.x -= this.dx;
+        ctx.drawImage(this.icon, this.x, this.y, 50, 50);
     };
     shoot() {
         this.y -= this.dy;
-    }
-    update() {
         this.draw();
     };
 };
@@ -61,14 +55,15 @@ const doKeyDown = (key) => {
         player.moveRight();
         player.update();
     };
+    if(key.keyCode == 32) {
+        player.update();
+        projectileArray.push(new Projectile(player.x, player.y-75));
+        projectile.shoot();
+    };
 };
-
-//return projectile to user after firing 
 
 let player = new Player(canvas.width/2, canvas.height-50);
 player.update();
-let projectile = new Projectile(canvas.width/2, canvas.height-150);
-projectile.update();
 addEventListener('keydown', doKeyDown, true);
 
 class Villain {
@@ -98,6 +93,9 @@ const animate = () => {
     requestAnimationFrame(animate);
     villainsArray.forEach((villain) => {
         villain.update();
+    });
+    projectileArray.forEach((projectile) => {
+        projectile.shoot();
     });
 };
 
