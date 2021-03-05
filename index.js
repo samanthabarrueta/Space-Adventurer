@@ -19,11 +19,10 @@ class Player {
     }; 
     moveRight() {
         this.x += this.dx;
+        this.draw();
     };
     moveLeft() {
         this.x -= this.dx;
-    };
-    update() {
         this.draw();
     };
 };
@@ -32,7 +31,6 @@ class Projectile {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        //this.dx = 10;
         this.dy = 5;
         this.radius = 50;
         this.icon = document.getElementById('missile');
@@ -49,21 +47,18 @@ class Projectile {
 const doKeyDown = (key) => {
     if(key.keyCode == 37) { 
         player.moveLeft();
-        player.update();
     };
     if(key.keyCode == 39) {
         player.moveRight();
-        player.update();
     };
     if(key.keyCode == 32) {
-        player.update();
         projectileArray.push(new Projectile(player.x, player.y-75));
         projectile.shoot();
     };
 };
 
 let player = new Player(canvas.width/2, canvas.height-50);
-player.update();
+player.draw();
 addEventListener('keydown', doKeyDown, true);
 
 class Villain {
