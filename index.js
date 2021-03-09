@@ -85,6 +85,7 @@ const spawnVillains = () => {
 };
 
 const animate = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     requestAnimationFrame(animate);
     villainsArray.forEach((villain) => {
         villain.update();
