@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let playersArray = [];
 let villainsArray = [];
 let projectileArray = [];
 
@@ -18,11 +19,14 @@ class Player {
         ctx.drawImage(this.icon, this.x, this.y, 50, 50);
     }; 
     moveRight() {
-        this.x += this.dx;
+        this.x += 10;
         this.draw();
     };
     moveLeft() {
-        this.x -= this.dx;
+        this.x -= 10;
+        this.draw();
+    };
+    update() {
         this.draw();
     };
 };
@@ -43,23 +47,6 @@ class Projectile {
         this.draw();
     };
 };
-
-const doKeyDown = (key) => {
-    if(key.keyCode == 37) { 
-        player.moveLeft();
-    };
-    if(key.keyCode == 39) {
-        player.moveRight();
-    };
-    if(key.keyCode == 32) {
-        projectileArray.push(new Projectile(player.x, player.y-75));
-        projectile.shoot();
-    };
-};
-
-let player = new Player(canvas.width/2, canvas.height-50);
-player.draw();
-addEventListener('keydown', doKeyDown, true);
 
 class Villain {
     constructor() {
@@ -85,14 +72,39 @@ const spawnVillains = () => {
 };
 
 const animate = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     requestAnimationFrame(animate);
+    let player = new Player(canvas.width/2, canvas.height-50);
+    player.draw();
+
+    const doKeyDown = (key) => {
+        if(key.keyCode == 37) { 
+            playersArray.push(new Player(player.x, player.y));
+            player.moveLeft();
+        };
+        if(key.keyCode == 39) {
+            playersArray.push(new Player(player.x, player.y));
+            player.moveRight();
+        };
+        if(key.keyCode == 32) {
+            projectileArray.push(new Projectile(player.x, player.y-75));
+            projectile.shoot();
+        };
+    };
+
+    playersArray.forEach((player) => {
+        player.moveLeft();
+    });
     villainsArray.forEach((villain) => {
         villain.update();
     });
     projectileArray.forEach((projectile) => {
         projectile.shoot();
     });
+
+    
+    
+    addEventListener('keydown', doKeyDown, true);
 };
 
 animate();
