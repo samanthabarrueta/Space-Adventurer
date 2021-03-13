@@ -97,12 +97,18 @@ const start = () => {
 const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     requestAnimationFrame(animate);
-    
     playersArray.forEach((player) => {
         player.update();
     });
-    villainsArray.forEach((villain) => {
+    villainsArray.forEach((villain, villainIndex) => {
         villain.update();
+        projectileArray.forEach((projectile, projectileIndex) => {
+            const dist = Math.hypot(projectile.x - villain.x, projectile.y - villain.y);            
+            if (dist - villain.radius - projectile.radius < 1) {
+                villainsArray.splice(villainIndex, 1);
+                projectileArray.splice(projectileIndex, 1);
+            };
+        });
     });
     projectileArray.forEach((projectile) => {
         projectile.shoot();
