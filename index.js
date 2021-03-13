@@ -71,29 +71,35 @@ const spawnVillains = () => {
     }, 1500);
 };
 
-const animate = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    requestAnimationFrame(animate);
+const start = () => {
     let player = new Player(canvas.width/2, canvas.height-50);
     player.draw();
 
     const doKeyDown = (key) => {
-        if(key.keyCode == 37) { 
-            playersArray.push(new Player(player.x, player.y));
+        if(key.keyCode == 37) {             
             player.moveLeft();
+            playersArray.pop(playersArray.length-1);
+            playersArray.push(new Player(player.x, player.y));
         };
         if(key.keyCode == 39) {
-            playersArray.push(new Player(player.x, player.y));
             player.moveRight();
+            playersArray.pop(playersArray.length-1);
+            playersArray.push(new Player(player.x, player.y));
         };
         if(key.keyCode == 32) {
             projectileArray.push(new Projectile(player.x, player.y-75));
             projectile.shoot();
         };
     };
+    addEventListener('keydown', doKeyDown, true);
+};
 
+const animate = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    requestAnimationFrame(animate);
+    
     playersArray.forEach((player) => {
-        player.moveLeft();
+        player.update();
     });
     villainsArray.forEach((villain) => {
         villain.update();
@@ -101,11 +107,8 @@ const animate = () => {
     projectileArray.forEach((projectile) => {
         projectile.shoot();
     });
-
-    
-    
-    addEventListener('keydown', doKeyDown, true);
 };
 
+start();
 animate();
 spawnVillains();
