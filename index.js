@@ -100,18 +100,24 @@ const animate = () => {
     playersArray.forEach((player) => {
         player.update();
     });
+    projectileArray.forEach((projectile) => {
+        projectile.shoot();
+    });
     villainsArray.forEach((villain, villainIndex) => {
         villain.update();
         projectileArray.forEach((projectile, projectileIndex) => {
-            const dist = Math.hypot(projectile.x - villain.x, projectile.y - villain.y);            
-            if (dist - villain.radius - projectile.radius < 1) {
+            const villainProjectileDistance = Math.hypot(projectile.x - villain.x, projectile.y - villain.y);            
+            if (villainProjectileDistance - villain.radius - projectile.radius < 1) {
                 villainsArray.splice(villainIndex, 1);
                 projectileArray.splice(projectileIndex, 1);
             };
         });
-    });
-    projectileArray.forEach((projectile) => {
-        projectile.shoot();
+        playersArray.forEach((player, playerIndex) => {
+            const villainPlayerDistance = Math.hypot(player.x - villain.x, player.y - villain.y);
+            if (villainPlayerDistance - villain.radius - player.radius < 1) {
+                playersArray.splice(playerIndex, 1);
+            };
+        });
     });
 };
 
