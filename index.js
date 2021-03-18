@@ -11,7 +11,6 @@ class Player {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.dx = 10;
         this.radius = 25;
         this.icon = document.getElementById('user');
     };
@@ -19,11 +18,11 @@ class Player {
         ctx.drawImage(this.icon, this.x, this.y, 50, 50);
     }; 
     moveRight() {
-        this.x += 10;
+        this.x += 25;
         this.draw();
     };
     moveLeft() {
-        this.x -= 10;
+        this.x -= 25;
         this.draw();
     };
     update() {
@@ -78,12 +77,12 @@ const start = () => {
     const doKeyDown = (key) => {
         if(key.keyCode == 37) {             
             player.moveLeft();
-            playersArray.pop(playersArray.length-1);
+            playersArray.pop();
             playersArray.push(new Player(player.x, player.y));
         };
         if(key.keyCode == 39) {
             player.moveRight();
-            playersArray.pop(playersArray.length-1);
+            playersArray.pop();
             playersArray.push(new Player(player.x, player.y));
         };
         if(key.keyCode == 32) {
