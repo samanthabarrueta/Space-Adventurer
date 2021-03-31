@@ -7,6 +7,11 @@ let playersArray = [];
 let villainsArray = [];
 let projectileArray = [];
 
+const game = {
+    score: 0, 
+    lives: 3
+};
+
 class Player {
     constructor(x, y) {
         this.x = x;
@@ -87,7 +92,6 @@ const start = () => {
         };
         if(key.keyCode == 32) {
             projectileArray.push(new Projectile(player.x, player.y-75));
-            projectile.shoot();
         };
     };
     addEventListener('keydown', doKeyDown, true);
@@ -96,6 +100,7 @@ const start = () => {
 const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     requestAnimationFrame(animate);
+
     playersArray.forEach((player) => {
         player.update();
     });
@@ -109,12 +114,16 @@ const animate = () => {
             if (villainProjectileDistance - villain.radius - projectile.radius < 1) {
                 villainsArray.splice(villainIndex, 1);
                 projectileArray.splice(projectileIndex, 1);
+                game.score += 1;
+                console.log(game);
             };
         });
         playersArray.forEach((player, playerIndex) => {
             const villainPlayerDistance = Math.hypot(player.x - villain.x, player.y - villain.y);
             if (villainPlayerDistance - villain.radius - player.radius < 1) {
                 playersArray.splice(playerIndex, 1);
+                game.lives -= 1;
+                console.log(game);
             };
         });
     });
