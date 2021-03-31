@@ -79,6 +79,11 @@ const start = () => {
     let player = new Player(canvas.width/2, canvas.height-50);
     player.draw();
 
+    $('#statsTracker').html(
+        `<h3>Score: ${game.score}
+        Lives: ${game.lives}</h3>`
+    );
+
     const doKeyDown = (key) => {
         if(key.keyCode == 37) {             
             player.moveLeft();
@@ -115,7 +120,10 @@ const animate = () => {
                 villainsArray.splice(villainIndex, 1);
                 projectileArray.splice(projectileIndex, 1);
                 game.score += 1;
-                console.log(game);
+                $('#statsTracker').html(
+                    `<h3>Score: ${game.score}
+                    Lives: ${game.lives}</h3>`
+                );
             };
         });
         playersArray.forEach((player, playerIndex) => {
@@ -123,7 +131,10 @@ const animate = () => {
             if (villainPlayerDistance - villain.radius - player.radius < 1) {
                 playersArray.splice(playerIndex, 1);
                 game.lives -= 1;
-                console.log(game);
+                $('#statsTracker').html(
+                    `<h3>Score: ${game.score}
+                    Lives: ${game.lives}</h3>`
+                );
             };
         });
     });
