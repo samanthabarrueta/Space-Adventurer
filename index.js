@@ -122,7 +122,7 @@ const animate = () => {
             const villainProjectileDistance = Math.hypot(projectile.x - villain.x, projectile.y - villain.y);            
             if (villainProjectileDistance - villain.radius - projectile.radius < 1) {
                 villainsArray.splice(villainIndex, 1);
-                projectileArray.splice(projectileIndex, 1);
+                //projectileArray.splice(projectileIndex, 1);
                 game.score += 1;
                 $('#statsTracker').html(
                     `<h3>Score: ${game.score}
