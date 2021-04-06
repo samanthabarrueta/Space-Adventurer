@@ -75,7 +75,14 @@ const spawnVillains = () => {
     }, 1500);
 };
 
+$('#statsTracker').html(
+    `<h3>Score: ${game.score}
+    Lives: ${game.lives}</h3>`
+);
+
 const start = () => {
+    animate();
+    spawnVillains();
     let player = new Player(canvas.width/2, canvas.height-50);
     player.draw();
 
@@ -140,6 +147,6 @@ const animate = () => {
     });
 };
 
-start();
-animate();
-spawnVillains();
+$('#start').append(
+    `<button onclick='start()'>Start</button>`
+);
