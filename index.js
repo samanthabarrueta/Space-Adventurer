@@ -75,16 +75,13 @@ const spawnVillains = () => {
     }, 1500);
 };
 
-$('#statsTracker').html(
-    `<h3>Score: ${game.score}
-    Lives: ${game.lives}</h3>`
-);
-
 const start = () => {
     animate();
     spawnVillains();
     let player = new Player(canvas.width/2, canvas.height-50);
     player.draw();
+
+    $('#start').empty();
 
     $('#statsTracker').html(
         `<h3>Score: ${game.score}
