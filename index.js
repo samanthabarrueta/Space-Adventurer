@@ -81,12 +81,7 @@ const start = () => {
     let player = new Player(canvas.width/2, canvas.height-50);
     player.draw();
 
-    $('#start').empty();
-
-    $('#statsTracker').html(
-        `<h3>Score: ${game.score}
-        Lives: ${game.lives}</h3>`
-    );
+    $('#startButton').hide();
 
     const doKeyDown = (key) => {
         if(key.keyCode == 37) {             
@@ -112,6 +107,7 @@ const animate = () => {
     ctx.fillStyle = 'white'
     ctx.fillText(`Score: ${game.score}
     Lives: ${game.lives}`, 10, 50);
+
     requestAnimationFrame(animate);
 
     playersArray.forEach((player) => {
@@ -138,7 +134,3 @@ const animate = () => {
         });
     });
 };
-
-$('#start').append(
-    `<button onclick='start()'>Start</button>`
-);
