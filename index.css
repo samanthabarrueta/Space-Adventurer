@@ -4,6 +4,7 @@ body {
 
 canvas {
     background-color: #262038;
+    z-index: 1;
     width: 100%;
     height: auto;
 }
@@ -23,6 +24,13 @@ h3 {
 
 .mb {
     margin-bottom: 0 !important;
+}
+
+#startButton {
+    z-index: 3;
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 
 #user {
