@@ -108,6 +108,10 @@ const start = () => {
 
 const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '30px Arial';
+    ctx.fillStyle = 'white'
+    ctx.fillText(`Score: ${game.score}
+    Lives: ${game.lives}`, 10, 50);
     requestAnimationFrame(animate);
 
     playersArray.forEach((player) => {
@@ -118,16 +122,11 @@ const animate = () => {
     });
     villainsArray.forEach((villain, villainIndex) => {
         villain.update();
-        projectileArray.forEach((projectile, projectileIndex) => {
+        projectileArray.forEach((projectile) => {
             const villainProjectileDistance = Math.hypot(projectile.x - villain.x, projectile.y - villain.y);            
             if (villainProjectileDistance - villain.radius - projectile.radius < 1) {
                 villainsArray.splice(villainIndex, 1);
-                //projectileArray.splice(projectileIndex, 1);
                 game.score += 1;
-                $('#statsTracker').html(
-                    `<h3>Score: ${game.score}
-                    Lives: ${game.lives}</h3>`
-                );
             };
         });
         playersArray.forEach((player, playerIndex) => {
@@ -135,10 +134,6 @@ const animate = () => {
             if (villainPlayerDistance - villain.radius - player.radius < 1) {
                 playersArray.splice(playerIndex, 1);
                 game.lives -= 1;
-                $('#statsTracker').html(
-                    `<h3>Score: ${game.score}
-                    Lives: ${game.lives}</h3>`
-                );
             };
         });
     });
