@@ -119,6 +119,9 @@ const animate = () => {
     });
     villainsArray.forEach((villain, villainIndex) => {
         villain.update();
+        if (villain.y == canvas.height) {
+            game.lives -= 1;
+        };
         projectileArray.forEach((projectile) => {
             const villainProjectileDistance = Math.hypot(projectile.x - villain.x, projectile.y - villain.y);            
             if (villainProjectileDistance - villain.radius - projectile.radius < 1) {
