@@ -78,6 +78,7 @@ const spawnVillains = () => {
 const start = () => {
     animate();
     spawnVillains();
+    playersArray.push(new Player(canvas.width/2, canvas.height-50));
     let player = new Player(canvas.width/2, canvas.height-50);
     player.draw();
 
