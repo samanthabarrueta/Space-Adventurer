@@ -69,15 +69,14 @@ class Villain {
     };
 };
 
-const spawnVillains = () => {
-    setInterval(() => {
-        villainsArray.push(new Villain())
-    }, 1500);
-};
+
+const villainAnimation = setInterval(() => {
+    villainsArray.push(new Villain())
+}, 1500);
+
 
 const start = () => {
     animate();
-    spawnVillains();
     playersArray.push(new Player(canvas.width/2, canvas.height-50));
     let player = new Player(canvas.width/2, canvas.height-50);
     player.draw();
@@ -109,7 +108,7 @@ const animate = () => {
     ctx.fillText(`Score: ${game.score}
     Lives: ${game.lives}`, 10, 50);
 
-    requestAnimationFrame(animate);
+    const startAnimation = requestAnimationFrame(animate);
 
     playersArray.forEach((player) => {
         player.update();
@@ -133,6 +132,11 @@ const animate = () => {
             const villainPlayerDistance = Math.hypot(player.x - villain.x, player.y - villain.y);
             if (villainPlayerDistance - villain.radius - player.radius < 1) {
                 playersArray.splice(playerIndex, 1);
+                villainsArray.splice(villainIndex, 1);
+                cancelAnimationFrame(startAnimation);
+                setInterval(() => {
+                    requestAnimationFrame(animate);
+                }, 1500);
                 game.lives -= 1;
             };
         });
