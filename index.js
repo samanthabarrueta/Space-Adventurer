@@ -70,18 +70,21 @@ class Villain {
 };
 
 
-const villainAnimation = setInterval(() => {
+const spawnVillains = setInterval(() => {
     villainsArray.push(new Villain())
 }, 1500);
 
 
+
 const start = () => {
     animate();
+
     playersArray.push(new Player(canvas.width/2, canvas.height-50));
     let player = new Player(canvas.width/2, canvas.height-50);
     player.draw();
 
     $('#startButton').hide();
+    $('#directions').hide();
 
     const doKeyDown = (key) => {
         if(key.keyCode == 37) {             
@@ -118,6 +121,7 @@ const animate = () => {
     });
     villainsArray.forEach((villain, villainIndex) => {
         villain.update();
+        
         if (villain.y == canvas.height) {
             game.lives -= 1;
         };

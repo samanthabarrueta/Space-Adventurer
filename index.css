@@ -1,5 +1,6 @@
 body {
     background-color: #262038;
+    color: white;
 }
 
 canvas {
@@ -20,17 +21,27 @@ h3 {
 #game {
     height: 620px;
     border: 1px solid white;
+    color: white;
 }
 
 .mb {
     margin-bottom: 0 !important;
 }
 
+#directions {
+    z-index: 3;
+    position: absolute;
+    top: 0%;
+    left: relative;
+    align-content: center;
+}
+
 #startButton {
     z-index: 3;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: relative;
+    align-content: center;
 }
 
 #user {
