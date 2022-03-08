@@ -69,12 +69,9 @@ class Villain {
     };
 };
 
-
 const spawnVillains = setInterval(() => {
     villainsArray.push(new Villain())
 }, 1500);
-
-
 
 const start = () => {
     animate();
