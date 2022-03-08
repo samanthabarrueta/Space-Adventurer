@@ -108,6 +108,10 @@ const animate = () => {
     ctx.fillText(`Score: ${game.score}
     Lives: ${game.lives}`, 10, 50);
 
+    if (game.lives === 0) {
+        cancelAnimationFrame(startAnimation);
+    }
+
     const startAnimation = requestAnimationFrame(animate);
 
     playersArray.forEach((player) => {
